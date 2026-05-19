@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: .
+    ports:
+      - "5173:5173" # Se a IA usou React puro (CRA), mude ambos para "3000:3000"
+    volumes:
+      # Espelha a sua pasta local para dentro do container (Hot Reload)
+      - .:/app
+      # Impede que a sua máquina local apague a pasta node_modules do container
+      - /app/node_modules
+    environment:
+      # Força a atualização da tela quando você salva um arquivo
+      - WATCHPACK_POLLING=true
+      - CHOKIDAR_USEPOLLING=true

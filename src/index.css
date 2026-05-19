@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .glass {
+    @apply bg-surface/80 backdrop-blur-xl border border-white/10 shadow-2xl;
+  }
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
