@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { AiService } from '../services/api';
 import { Sparkles } from 'lucide-react';
-import Markdown from 'react-markdown';
 
 interface AiConsultantCardProps {
   month: number;
@@ -22,6 +21,17 @@ export function AiConsultantCard({ month, year }: AiConsultantCardProps) {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Função simples para formatar o negrito (**) que o Gemini retorna
+  const formatText = (text: string) => {
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={i} className="text-indigo-300">{part.slice(2, -2)}</strong>;
+      }
+      return <span key={i}>{part}</span>;
+    });
   };
 
   return (
@@ -64,8 +74,8 @@ export function AiConsultantCard({ month, year }: AiConsultantCardProps) {
       )}
 
       {dicas && !loading && (
-        <div className="mt-4 p-4 bg-indigo-950/30 rounded-xl border border-indigo-500/20 text-sm text-zinc-300 leading-relaxed prose prose-invert prose-indigo">
-          <Markdown>{dicas}</Markdown>
+        <div className="mt-4 p-4 bg-indigo-950/30 rounded-xl border border-indigo-500/20 text-sm text-zinc-300 leading-relaxed whitespace-pre-wrap">
+          {formatText(dicas)}
           <div className="mt-4 flex justify-end">
              <button onClick={fetchDicas} className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
                <Sparkles size={12}/> Gerar nova análise
