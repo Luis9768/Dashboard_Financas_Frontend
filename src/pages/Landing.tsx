@@ -1,59 +1,59 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { TrendingUp, ShieldCheck, Target, PieChart, ArrowRight, WalletCards } from 'lucide-react';
+import { TrendingUp, ShieldCheck, Target, PieChart, ArrowRight, WalletCards, Zap, Heart, Award } from 'lucide-react';
 
 export function Landing() {
-  const features = [
+  const services = [
     {
-      title: "Controle Inteligente",
-      description: "Saiba exatamente para onde vai o seu dinheiro e mantenha suas finanças sob controle com relatórios visuais.",
-      icon: <PieChart className="w-8 h-8 text-blue-500" />,
+      title: "Gestão Descomplicada",
+      description: "Acompanhe todas as suas receitas e despesas em uma interface fluida, rápida e livre de distrações.",
+      icon: <Zap className="w-8 h-8 text-primary" />,
     },
     {
       title: "Metas e Caixinhas",
-      description: "Crie metas de gastos para o mês e guarde seu dinheiro em caixinhas separadas para os seus maiores sonhos.",
-      icon: <Target className="w-8 h-8 text-green-500" />,
+      description: "Transforme grandes sonhos em pequenas metas alcançáveis, guardando dinheiro de forma organizada.",
+      icon: <Target className="w-8 h-8 text-receita" />,
     },
     {
-      title: "Insights do Mercado",
-      description: "Nossa IA analisa o mercado financeiro e o seu padrão de gastos para sugerir as melhores estratégias de reserva.",
-      icon: <TrendingUp className="w-8 h-8 text-purple-500" />,
+      title: "IA Financeira",
+      description: "Consultoria contínua da nossa Inteligência Artificial para avaliar seus gastos e sugerir melhorias.",
+      icon: <TrendingUp className="w-8 h-8 text-blue-500" />,
     },
     {
       title: "Segurança de Dados",
-      description: "Suas informações estão protegidas com os mais altos padrões de segurança, criptografia e privacidade.",
+      description: "Seus dados estão protegidos com os melhores padrões de criptografia. A sua privacidade é a nossa prioridade.",
       icon: <ShieldCheck className="w-8 h-8 text-orange-500" />,
     }
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
+    <div className="min-h-screen bg-background font-sans text-white overflow-hidden">
       {/* Header */}
-      <header className="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+      <header className="fixed w-full top-0 z-50 bg-background/80 backdrop-blur-md border-b border-surfaceHighlight">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="bg-blue-600 p-2 rounded-xl">
-              <WalletCards className="w-6 h-6 text-white" />
+            <div className="bg-primary/20 p-2 rounded-xl border border-primary/50 shadow-neon-primary">
+              <WalletCards className="w-6 h-6 text-primary" />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-700 to-indigo-600 bg-clip-text text-transparent">
+            <span className="text-xl font-bold tracking-tight text-white">
               FinanceApp
             </span>
           </div>
           <div className="flex items-center gap-4">
-            <Link to="/login" className="text-slate-600 font-medium hover:text-blue-600 transition-colors">
+            <Link to="/login" className="text-zinc-400 font-medium hover:text-white transition-colors">
               Entrar
             </Link>
-            <Link to="/register" className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-full font-medium transition-all shadow-lg shadow-blue-200">
-              Cadastrar
+            <Link to="/register" className="bg-primary hover:bg-primaryDark text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-neon-primary hover:scale-105 active:scale-95">
+              Começar Agora
             </Link>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] opacity-20 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-b from-blue-400 to-purple-500 rounded-full blur-[100px]" />
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-20 pointer-events-none">
+          <div className="absolute inset-0 bg-primary rounded-full blur-[120px]" />
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -61,18 +61,21 @@ export function Landing() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-5xl lg:text-7xl font-extrabold tracking-tight text-slate-900 mb-8"
+            className="text-5xl lg:text-7xl font-extrabold tracking-tight text-white mb-8 leading-tight"
           >
-            Domine o seu <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Futuro Financeiro</span>
+            Assuma o controle do seu <br className="hidden md:block"/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">
+              Futuro Financeiro
+            </span>
           </motion.h1>
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-xl text-slate-600 max-w-2xl mx-auto mb-12"
+            className="text-xl text-zinc-400 max-w-2xl mx-auto mb-12"
           >
-            A plataforma definitiva para organizar seus gastos, poupar para o que importa e investir melhor com a ajuda de Inteligência Artificial.
+            Deixe as planilhas complexas no passado. Nossa plataforma inteligente e automatizada te ajuda a multiplicar seu patrimônio com foco no que realmente importa.
           </motion.p>
           
           <motion.div 
@@ -81,7 +84,7 @@ export function Landing() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Link to="/register" className="group flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all hover:scale-105 active:scale-95 shadow-xl shadow-slate-300">
+            <Link to="/register" className="group flex items-center justify-center gap-2 bg-white text-background hover:bg-zinc-200 px-8 py-4 rounded-full text-lg font-bold transition-all hover:scale-105 active:scale-95">
               Vamos Começar
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
@@ -89,42 +92,46 @@ export function Landing() {
         </div>
       </section>
 
-      {/* Features / Mercados Financeiros */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Serviços / Qualidade */}
+      <section className="py-24 bg-surface border-y border-surfaceHighlight relative">
+        <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-receita/5 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">
-              Tudo que você precisa em um só lugar
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+              Qualidade de nível corporativo,<br/>feita para você.
             </h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">
-              Seja para organizar as contas do mês ou entender melhor como proteger o seu patrimônio da inflação, nós temos as ferramentas certas.
+            <p className="text-zinc-400 max-w-2xl mx-auto">
+              Nossos serviços foram desenhados com a mais alta tecnologia para oferecer uma experiência fluida, sem travamentos e com visual premium.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
+            {services.map((service, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-50 transition-all cursor-pointer group"
+                className="bg-background p-8 rounded-3xl border border-surfaceHighlight hover:border-primary/50 transition-all cursor-pointer group hover:shadow-neon-primary"
               >
-                <div className="bg-white w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform">
-                  {feature.icon}
+                <div className="bg-surfaceHighlight w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  {service.icon}
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">{feature.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{feature.description}</p>
+                <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>
+                <p className="text-zinc-400 leading-relaxed text-sm">{service.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Educacional / Dica */}
-      <section className="py-20 bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Impacto / Educacional */}
+      <section className="py-24 bg-background relative overflow-hidden">
+        <div className="absolute right-0 bottom-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <div className="lg:w-1/2">
               <motion.div 
@@ -132,16 +139,20 @@ export function Landing() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-3xl lg:text-5xl font-bold mb-6">
-                  Inteligência que trabalha pelo seu bolso.
+                <div className="flex items-center gap-2 mb-6">
+                  <Heart className="w-5 h-5 text-despesa" />
+                  <span className="text-despesa font-medium tracking-wider uppercase text-sm">Nosso Impacto</span>
+                </div>
+                <h2 className="text-3xl lg:text-5xl font-bold mb-6 text-white leading-tight">
+                  Nós transformamos a forma como você enxerga o seu dinheiro.
                 </h2>
-                <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-                  O mercado financeiro muda todos os dias. Com a inflação e as taxas de juros oscilando, ter um planejamento claro deixou de ser um luxo para ser uma necessidade. 
+                <p className="text-zinc-400 text-lg mb-8 leading-relaxed">
+                  Sabemos que o mercado financeiro pode parecer assustador. Taxas de juros, inflação, boletos acumulando... isso gera estresse e afeta a sua qualidade de vida.
                   <br/><br/>
-                  Nossa plataforma ajuda você a criar metas e alocar o seu orçamento para que o seu dinheiro pare de perder valor.
+                  Nosso impacto real vai muito além de gráficos. Nós entregamos <strong className="text-white">paz de espírito</strong>. Quando você sabe exatamente quanto ganha, quanto gasta e onde investir, as noites mal dormidas desaparecem.
                 </p>
-                <Link to="/register" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-semibold text-lg transition-colors">
-                  Crie sua conta gratuitamente <ArrowRight className="w-5 h-5" />
+                <Link to="/register" className="inline-flex items-center gap-2 text-primary hover:text-primaryDark font-semibold text-lg transition-colors">
+                  Mude sua vida financeira hoje <ArrowRight className="w-5 h-5" />
                 </Link>
               </motion.div>
             </div>
@@ -151,33 +162,63 @@ export function Landing() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="relative bg-slate-800 rounded-3xl p-8 border border-slate-700 shadow-2xl"
+                className="relative bg-surface rounded-3xl p-8 border border-surfaceHighlight shadow-2xl"
               >
-                <div className="flex gap-4 mb-8">
-                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                {/* Mockup Dashboard Visual */}
+                <div className="flex justify-between items-center mb-8 border-b border-surfaceHighlight pb-4">
+                  <div className="flex gap-2">
+                    <div className="w-3 h-3 rounded-full bg-despesa"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-receita"></div>
+                  </div>
+                  <div className="flex gap-2">
+                    <Award className="w-5 h-5 text-primary" />
+                    <span className="text-zinc-400 text-sm font-medium">Top 1% Investidores</span>
+                  </div>
                 </div>
+
                 <div className="space-y-6">
-                  <div className="h-4 bg-slate-700 rounded-full w-3/4"></div>
-                  <div className="h-4 bg-slate-700 rounded-full w-full"></div>
-                  <div className="h-4 bg-slate-700 rounded-full w-5/6"></div>
-                  <div className="h-4 bg-slate-700 rounded-full w-2/3"></div>
+                  <div className="flex justify-between items-end">
+                    <div>
+                      <p className="text-zinc-400 text-sm mb-1">Patrimônio Líquido</p>
+                      <p className="text-3xl font-bold text-white">R$ 142.500,00</p>
+                    </div>
+                    <div className="flex items-center gap-1 text-receita bg-receita/10 px-3 py-1 rounded-full">
+                      <TrendingUp className="w-4 h-4" />
+                      <span className="text-sm font-bold">+12% a.a.</span>
+                    </div>
+                  </div>
+                  
+                  <div className="h-4 bg-surfaceHighlight rounded-full w-full overflow-hidden flex">
+                    <div className="h-full bg-primary w-1/2"></div>
+                    <div className="h-full bg-receita w-1/4"></div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4 mt-6">
+                    <div className="bg-background p-4 rounded-xl border border-surfaceHighlight">
+                      <p className="text-zinc-400 text-xs mb-1">Meta: Reserva</p>
+                      <p className="text-white font-bold">100% Concluída</p>
+                    </div>
+                    <div className="bg-background p-4 rounded-xl border border-surfaceHighlight">
+                      <p className="text-zinc-400 text-xs mb-1">Saúde Financeira</p>
+                      <p className="text-receita font-bold">Excelente</p>
+                    </div>
+                  </div>
                 </div>
                 
                 {/* Floating card */}
                 <motion.div 
                   animate={{ y: [-10, 10, -10] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -bottom-10 -right-6 lg:-right-10 bg-white p-6 rounded-2xl shadow-xl max-w-xs border border-slate-100"
+                  className="absolute -bottom-10 -right-6 lg:-right-10 bg-surface p-6 rounded-2xl shadow-xl shadow-black/50 border border-primary/30"
                 >
-                  <div className="flex items-center gap-4 mb-3">
-                    <div className="bg-green-100 p-2 rounded-lg">
-                      <TrendingUp className="w-6 h-6 text-green-600" />
+                  <div className="flex items-center gap-4 mb-2">
+                    <div className="bg-receita/20 p-2 rounded-lg">
+                      <PieChart className="w-6 h-6 text-receita" />
                     </div>
                     <div>
-                      <p className="text-sm text-slate-500 font-medium">Rentabilidade</p>
-                      <p className="text-lg font-bold text-slate-900">+12,5% a.a.</p>
+                      <p className="text-sm text-zinc-400 font-medium">Metas Batidas</p>
+                      <p className="text-lg font-bold text-white">3 no último mês</p>
                     </div>
                   </div>
                 </motion.div>
@@ -188,9 +229,13 @@ export function Landing() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-white py-12 border-t border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500">
-          <p>© 2026 Dashboard Finanças. Desenvolvido para transformar sua relação com o dinheiro.</p>
+      <footer className="bg-surface py-12 border-t border-surfaceHighlight">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+          <div className="flex items-center gap-2 mb-4">
+            <WalletCards className="w-6 h-6 text-primary" />
+            <span className="text-lg font-bold text-white">FinanceApp</span>
+          </div>
+          <p className="text-zinc-500 text-sm">© 2026 Dashboard Finanças. Focado no seu sucesso absoluto.</p>
         </div>
       </footer>
     </div>
