@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { MetaService, CategoriaService } from '../services/api';
-import { Target, Plus } from 'lucide-react';
+import { Target, Plus, CheckCircle2 } from 'lucide-react';
 
 interface CategoryBudgetsProps {
   month: number;
@@ -14,6 +14,7 @@ export function CategoryBudgets({ month, year }: CategoryBudgetsProps) {
   const [selectedCat, setSelectedCat] = useState('');
   const [valorLimite, setValorLimite] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     fetchMetas();
@@ -42,6 +43,10 @@ export function CategoryBudgets({ month, year }: CategoryBudgetsProps) {
       setIsDefining(false);
       setValorLimite('');
       fetchMetas();
+      
+      // Mostrar Popup Animado
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 3000);
     } catch (e) {
       alert("Erro ao definir meta");
     } finally {
@@ -50,7 +55,16 @@ export function CategoryBudgets({ month, year }: CategoryBudgetsProps) {
   };
 
   return (
-    <div className="glass rounded-2xl p-6 border border-white/5 mb-8">
+    <div className="glass rounded-2xl p-6 border border-white/5 mb-8 relative">
+      
+      {/* Popup de Sucesso Animado */}
+      {showSuccess && (
+        <div className="absolute -top-4 right-4 bg-emerald-500/90 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2 animate-bounce z-50 backdrop-blur-sm border border-emerald-400">
+          <CheckCircle2 size={18} />
+          <span className="font-medium text-sm">Meta criada com sucesso!</span>
+        </div>
+      )}
+
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center">
