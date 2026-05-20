@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { Plus } from 'lucide-react';
+import { Plus, Download, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { SummaryCards } from '../components/SummaryCards';
 import { DashboardCharts } from '../components/DashboardCharts';
 import { TransactionTable } from '../components/TransactionTable';
@@ -11,12 +12,13 @@ import { CategoryBudgets } from '../components/CategoryBudgets';
 import { Vaults } from '../components/Vaults';
 import { AiConsultantCard } from '../components/AiConsultantCard';
 import { AlertBanner } from '../components/AlertBanner';
-import { Download } from 'lucide-react';
 
 interface DashboardContext {
   month: number;
   year: number;
 }
+
+const MONTH_NAMES = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
 export function Dashboard() {
   const { month, year } = useOutletContext<DashboardContext>();
@@ -25,7 +27,7 @@ export function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   
   const [resumo, setResumo] = useState<ResumoFinanceiroDto>({ totalReceitas: 0, totalDespesas: 0, saldo: 0 });
-  const [history, setHistory] = useState<any[]>([]); // Histórico de meses para o gráfico de barras
+  const [history, setHistory] = useState<any[]>([]);
   const [loadingResumo, setLoadingResumo] = useState(false);
   
   const [transactions, setTransactions] = useState<ListarLancamentosDto[]>([]);
@@ -41,7 +43,6 @@ export function Dashboard() {
       const data = await LancamentoService.getResumo(month, year);
       setResumo(data);
 
-      // Busca o histórico dos últimos 4 meses
       const monthNames = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
       const historyPromises = [];
       for (let i = 3; i >= 0; i--) {
@@ -62,7 +63,7 @@ export function Dashboard() {
       console.error("Erro ao buscar resumo", err);
     } finally {
       setLoadingResumo(false);
-      setTimeout(() => setIsInitialLoad(false), 800); // Dá um tempinho extra para a animação brilhar
+      setTimeout(() => setIsInitialLoad(false), 800);
     }
   };
 
@@ -85,7 +86,7 @@ export function Dashboard() {
   useEffect(() => {
     fetchDashboardData();
     fetchTransactions(0);
-  }, [month, year]); // Atualiza quando os filtros do Header mudam
+  }, [month, year]);
 
   const handleTransactionSuccess = () => {
     fetchDashboardData();
@@ -113,31 +114,50 @@ export function Dashboard() {
       {isInitialLoad && <SplashScreen />}
       <AlertBanner month={month} year={year} />
       
-      <div className="flex items-center justify-between mb-8">
+      {/* Page Header */}
+      <motion.div 
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4"
+      >
         <div>
-          <h2 className="text-2xl font-bold text-white tracking-tight">Visão Geral</h2>
-          <p className="text-zinc-400 mt-1">Acompanhe suas finanças deste mês.</p>
+          <div className="flex items-center gap-2 mb-1">
+            <h2 className="text-2xl font-bold text-white tracking-tight">Visão Geral</h2>
+            <span className="text-[11px] font-medium text-zinc-500 bg-white/[0.04] border border-white/[0.06] rounded-lg px-2 py-0.5">
+              {MONTH_NAMES[month - 1]} {year}
+            </span>
+          </div>
+          <p className="text-[14px] text-zinc-500">Acompanhe suas finanças e tome decisões inteligentes.</p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-2">
           <button 
             onClick={handleDownloadPdf}
-            className="bg-surfaceHighlight hover:bg-white/10 text-white px-4 py-2.5 rounded-lg font-medium transition-all flex items-center gap-2 border border-white/10"
+            className="flex items-center gap-2 bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] text-zinc-300 px-4 py-2.5 rounded-xl text-[13px] font-medium transition-all"
           >
-            <Download size={20} />
-            <span className="hidden sm:inline">Exportar PDF</span>
+            <Download size={15} />
+            <span className="hidden sm:inline">Exportar</span>
           </button>
           <button 
             onClick={() => setIsModalOpen(true)}
-            className="bg-primary hover:bg-primaryDark text-white px-4 py-2.5 rounded-lg font-medium transition-all shadow-neon-primary flex items-center gap-2"
+            className="group flex items-center gap-2 bg-white text-background px-4 py-2.5 rounded-xl text-[13px] font-semibold transition-all hover:shadow-[0_0_30px_-8px_rgba(139,92,246,0.4)] hover:scale-[1.02] active:scale-[0.98]"
           >
-            <Plus size={20} />
+            <Plus size={15} />
             <span className="hidden sm:inline">Novo Lançamento</span>
           </button>
         </div>
-      </div>
+      </motion.div>
 
-      <AiConsultantCard month={month} year={year} />
+      {/* AI Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.05 }}
+      >
+        <AiConsultantCard month={month} year={year} />
+      </motion.div>
 
+      {/* Summary Cards */}
       <SummaryCards 
         receitas={resumo.totalReceitas} 
         despesas={resumo.totalDespesas} 
@@ -145,20 +165,48 @@ export function Dashboard() {
         loading={loadingResumo} 
       />
 
-      <Vaults />
+      {/* Vaults */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.2 }}
+      >
+        <Vaults />
+      </motion.div>
 
-      <CategoryBudgets month={month} year={year} />
+      {/* Category Budgets */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.25 }}
+      >
+        <CategoryBudgets month={month} year={year} />
+      </motion.div>
 
-      <DashboardCharts transactions={allTransactions} history={history} />
+      {/* Charts */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.3 }}
+      >
+        <DashboardCharts transactions={allTransactions} history={history} />
+      </motion.div>
 
-      <TransactionTable 
-        transactions={transactions} 
-        loading={loadingTx} 
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-        onUpdate={handleTransactionSuccess}
-      />
+      {/* Transaction Table */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.35 }}
+      >
+        <TransactionTable 
+          transactions={transactions} 
+          loading={loadingTx} 
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          onUpdate={handleTransactionSuccess}
+        />
+      </motion.div>
 
       <TransactionModal 
         isOpen={isModalOpen} 
