@@ -19,7 +19,7 @@ export function Login() {
     try {
       const response = await AuthService.login({ email, senha });
       localStorage.setItem('@FinanceApp:token', response.token);
-      navigate('/');
+      navigate('/dashboard');
     } catch (err: any) {
       console.error("Erro no login:", err);
       if (err.code === 'ERR_NETWORK') {

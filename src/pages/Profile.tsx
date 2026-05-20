@@ -70,7 +70,7 @@ export function Profile() {
     <div className="max-w-3xl mx-auto w-full">
       <div className="flex items-center gap-4 mb-6">
         <button 
-          onClick={() => navigate('/')} 
+          onClick={() => navigate('/dashboard')} 
           className="p-2 rounded-full hover:bg-surfaceHighlight text-zinc-400 hover:text-white transition-colors"
           title="Voltar ao Dashboard"
         >

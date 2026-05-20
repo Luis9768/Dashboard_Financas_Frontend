@@ -3,6 +3,7 @@ import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Dashboard } from './pages/Dashboard';
 import { Profile } from './pages/Profile';
+import { Landing } from './pages/Landing';
 import { Layout } from './components/Layout';
 
 function App() {
@@ -14,7 +15,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         
-        <Route path="/" element={isAuthenticated ? <Layout /> : <Navigate to="/login" replace />}>
+        <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Landing />} />
+        
+        <Route path="/dashboard" element={isAuthenticated ? <Layout /> : <Navigate to="/login" replace />}>
           <Route index element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
         </Route>
